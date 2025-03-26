@@ -1,3 +1,4 @@
+import AboutUs from "./components/aboutus";
 import BannerCarousel from "./components/carousel";
 
 export default async function Page() {
@@ -7,6 +8,7 @@ export default async function Page() {
   return (
     <div>
       <BannerCarousel/>
+      <AboutUs/>
     </div>
   )
 }

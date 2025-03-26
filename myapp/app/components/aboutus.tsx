@@ -1,5 +1,6 @@
 export default function AboutUs() {
     return (
+        
         <div className="w-full md:px-32 py-12 bg-[#F7F7F7] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
             <h2 className="text-[#F69226] text-3xl font-semibold mb-7 text-left md:text-left">
                 ABOUT US
