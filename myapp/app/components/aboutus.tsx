@@ -5,7 +5,7 @@ export default function AboutUs() {
             <h2 className="text-[#F69226] text-3xl font-semibold mb-7 text-left md:text-left">
                 ABOUT US
             </h2>
-            <h1 className="text-gray-800 md:text-4xl font-semibold mb-6 text-left md:text-left leading-snug">
+            <h1 className="text-[#003366] md:text-4xl font-semibold mb-6 text-left md:text-left leading-snug">
                 CYBER SECURITY MATTERS. DG CYBER SECURITY FRAMEWORK INITIATIVES
             </h1>
             <p className="text-gray-600 text-sm md:text-lg max-w-4xl text-left md:text-left leading-relaxed">
