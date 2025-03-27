@@ -5,6 +5,7 @@ import { Roboto, Montserrat } from 'next/font/google';
 import "./globals.css";
 import Footer from "./components/footer";
 import SubFooter from "./components/subFooter";
+import Navbar from "./components/navbar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body
          className={`${roboto.className} ${montserrat.className}`}
       >
+        <Navbar/>
         {children}
         <SubFooter/>
         <Footer/>
