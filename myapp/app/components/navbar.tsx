@@ -74,46 +74,50 @@ const Navbar = () => {
             
             {activeDropdown === item && dropdownContent[item as keyof typeof dropdownContent] && (
               <div className="absolute left-0 bg-white shadow-lg rounded-md w-56 z-10">
-                <ul className="py-1"> {/* Reduced padding here */}
-                  {Object.entries(dropdownContent[item as keyof typeof dropdownContent]).map(([subItem, subSubItems], subIndex) => (
-                    <>
-                      {subIndex > 0 && <hr className="border-t border-gray-200 mx-2" />} {/* Horizontal divider */}
-                      <li
-                        key={subIndex}
-                        className="relative px-4 py-3 hover:bg-gray-100 group/subitem"
-                        onMouseEnter={() => handleSubDropdownHover(subItem)}
-                        onMouseLeave={() => setActiveSubDropdown(null)}
-                      >
-                        <div className="flex justify-between items-center">
-                          <span>{subItem}</span>
-                          {subSubItems.length > 0 && <span>▸</span>}
-                        </div>
-                
-                        {activeSubDropdown === subItem && subSubItems.length > 0 && (
-                          <div className="absolute left-full top-0 bg-white shadow-lg rounded-md min-w-[280px] z-20">
-                            <ul className="py-1"> {/* Reduced padding here */}
-                              {subSubItems.map((subSubItem, subSubIndex) => (
-                                <>
-                                  {subSubIndex > 0 && <hr className="border-t border-gray-200 mx-2" />} {/* Horizontal divider */}
-                                  <li 
-                                    key={subSubIndex} 
-                                    className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
-                                  >
-                                    <Link 
-                                      href={`/${item.toLowerCase()}/${subItem.toLowerCase().replace(/\s+/g, '-')}/${subSubItem.toLowerCase().replace(/\s+/g, '-')}`}
-                                      className="block w-full"
-                                    >
-                                      {subSubItem}
-                                    </Link>
-                                  </li>
-                                </>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
+                <ul className="py-1">
+                  {Object.entries(dropdownContent[item as keyof typeof dropdownContent]).map(([subItem, subSubItems], subIndex) => [
+                    subIndex > 0 && (
+                      <li key={`divider-${subIndex}`} className="px-2">
+                        <hr className="border-t border-gray-200" />
                       </li>
-                    </>
-                  ))}
+                    ),
+                    <li
+                      key={subIndex}
+                      className="relative px-4 py-3 hover:bg-gray-100 group/subitem"
+                      onMouseEnter={() => handleSubDropdownHover(subItem)}
+                      onMouseLeave={() => setActiveSubDropdown(null)}
+                    >
+                      <div className="flex justify-between items-center">
+                        <span>{subItem}</span>
+                        {subSubItems.length > 0 && <span>▸</span>}
+                      </div>
+                
+                      {activeSubDropdown === subItem && subSubItems.length > 0 && (
+                        <div className="absolute left-full top-0 bg-white shadow-lg rounded-md min-w-[280px] z-20">
+                          <ul className="py-1">
+                            {subSubItems.map((subSubItem, subSubIndex) => [
+                              subSubIndex > 0 && (
+                                <li key={`subdivider-${subSubIndex}`} className="px-2">
+                                  <hr className="border-t border-gray-200" />
+                                </li>
+                              ),
+                              <li 
+                                key={subSubIndex} 
+                                className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
+                              >
+                                <Link 
+                                  href={`/${item.toLowerCase()}/${subItem.toLowerCase().replace(/\s+/g, '-')}/${subSubItem.toLowerCase().replace(/\s+/g, '-')}`}
+                                  className="block w-full"
+                                >
+                                  {subSubItem}
+                                </Link>
+                              </li>
+                            ])}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  ])}
                 </ul>
               </div>
             )}
