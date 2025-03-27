@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="text-[#003366] bg-[#F7F7F7] shadow-lg p-1 ml-2 flex justify-between items-center font-semibold">
+    <nav className="text-[#003366] bg-[#F7F7F7] shadow-lg p-1 flex justify-between items-center font-semibold">
       {/* Logo on the Left */}
       <div>
         <Link href="/">

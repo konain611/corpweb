@@ -37,9 +37,9 @@ export default function BannerCarousel() {
         const interval = setInterval(() => {
             setActiveIndex(current => (current + 1) % slides.length);
         }, 2500);
-
+    
         return () => clearInterval(interval);
-    }, []);
+    }, [slides.length]);
 
     const handlePrevious = () => {
         setActiveIndex(current => (current - 1 + slides.length) % slides.length);
