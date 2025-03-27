@@ -7,64 +7,112 @@ import { useState } from "react";
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
-  const [activeSubSubDropdown, setActiveSubSubDropdown] = useState<string | null>(null);
 
-  const handleDropdownClick = (item: string) => {
-    setActiveDropdown(activeDropdown === item ? null : item);
+  const dropdownContent = {
+    Company: {
+      "About Us": ["Company Overview", "Leadership", "Experience", "Accredation", "Policy"],
+      "Strategy": ["DG Edge", "Customer Recognition", "Knowledge Base", "Implimentation Services", "Technical Support"],
+      "Contact Us": ["Customer Support", "Partner With Us", "General Query", "Media Request"],
+    },
+    Services: {
+      "Detection & Response": ["GRC Consulting", "CyberSecurity Cnsulting & Advisory Services", "Best Cyber Security Product Report", "Buyer's Guide For Best Cyber Security Product"],
+      "Assesment": ["GRC Implementation Services", "Security Assesment & Penetration Testing", "POC As A Service"],
+      "Managed": ["Managed Security Services (MSS)", "Cyber Secuirty Professional & Certification Training Through DG Academy", "Business Continuity & Recovery (BCM/DR) Automation"],
+      "Cloud": ["DG Cloud Hosting Services", "Virtualization & Cloud Computing (VCC) Consulting Services", "Cloud Migration Services"],
+    },
+    Products: {
+      "Security Challenge": ["Threat Assurance", "DG Lab"],
+      "Education": ["DG Academy", "DG Kids"],
+      "Cloud Security": ["DG Cloud"],
+      "Media": ["DG Magazine", "DG Media"],
+      "Technology": ["Native Security"],
+    }
   };
 
-  const handleSubDropdownClick = (subItem: string) => {
-    setActiveSubDropdown(activeSubDropdown === subItem ? null : subItem);
+  const handleDropdownHover = (item: string) => {
+    setActiveDropdown(item);
+  };
+
+  const handleSubDropdownHover = (subItem: string) => {
+    setActiveSubDropdown(subItem);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveDropdown(null);
+    setActiveSubDropdown(null);
   };
 
   return (
-    <nav className="text-[#003366] p-1 ml-2 flex justify-between items-center font-semibold">
+    <nav className="text-[#003366] bg-[#F7F7F7] shadow-lg p-1 ml-2 flex justify-between items-center font-semibold">
       {/* Logo on the Left */}
       <div>
         <Link href="/">
-        <Image src="/Logo/LogoRound.png" alt="Diginfo Logo" width={60} height={60}/>
+          <Image src="/Logo/LogoRound.png" alt="Diginfo Logo" width={70} height={70} />
         </Link>
       </div>
       
       {/* Navigation Links in the Middle */}
-      <div className="flex space-x-6">
-        {["Home", "Dropdown", "Services", "Pricing", "Contact"].map((item, index) => (
+      <div className="flex space-x-12">
+        {["Home", "Company", "Services", "Products"].map((item, index) => (
           <div
             key={index}
-            className="relative"
+            className="relative group"
+            onMouseEnter={() => handleDropdownHover(item)}
+            onMouseLeave={handleMouseLeave}
           >
-            <button 
-              className={`hover:text-[#F69226] flex items-center ${activeDropdown === item ? 'text-[#F69226]' : ''}`}
-              onClick={() => handleDropdownClick(item)}
-            >
-              {item} {item === "Dropdown" && <span className="ml-1">▾</span>}
-            </button>
-            {activeDropdown === item && item !== "Home" && item !== "Media" && (
-              <div className="absolute left-0 mt-2 bg-gray-100 shadow-lg rounded-md w-48">
-                <ul className="py-2">
-                  {["Option 1", "Option 2", "Option 3", "Option 4"].map((subItem, subIndex) => (
-                    <li
-                      key={subIndex}
-                      className="relative px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                    >
-                      <button
-                        className={`w-full text-left ${activeSubDropdown === subItem ? 'text-[#F69226]' : ''}`}
-                        onClick={() => handleSubDropdownClick(subItem)}
+            {item === "Home" ? (
+              <Link href="/" className="hover:text-[#F69226] flex items-center">
+                {item}
+              </Link>
+            ) : (
+              <button 
+                className={`hover:text-[#F69226] flex items-center ${activeDropdown === item ? 'text-[#F69226]' : ''}`}
+              >
+                {item} <span className="ml-1">▾</span>
+              </button>
+            )}
+            
+            {activeDropdown === item && dropdownContent[item as keyof typeof dropdownContent] && (
+              <div className="absolute left-0 bg-white shadow-lg rounded-md w-56 z-10">
+                <ul className="py-1"> {/* Reduced padding here */}
+                  {Object.entries(dropdownContent[item as keyof typeof dropdownContent]).map(([subItem, subSubItems], subIndex) => (
+                    <>
+                      {subIndex > 0 && <hr className="border-t border-gray-200 mx-2" />} {/* Horizontal divider */}
+                      <li
+                        key={subIndex}
+                        className="relative px-4 py-3 hover:bg-gray-100 group/subitem"
+                        onMouseEnter={() => handleSubDropdownHover(subItem)}
+                        onMouseLeave={() => setActiveSubDropdown(null)}
                       >
-                        {subItem} ▸
-                      </button>
-                      {activeSubDropdown === subItem && (
-                        <div className="absolute left-full top-0 ml-2 bg-gray-100 shadow-lg rounded-md w-48">
-                          <ul className="py-2">
-                            {["Sub-Option A", "Sub-Option B", "Sub-Option C"].map((subSubItem, subSubIndex) => (
-                              <li key={subSubIndex} className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                                {subSubItem}
-                              </li>
-                            ))}
-                          </ul>
+                        <div className="flex justify-between items-center">
+                          <span>{subItem}</span>
+                          {subSubItems.length > 0 && <span>▸</span>}
                         </div>
-                      )}
-                    </li>
+                
+                        {activeSubDropdown === subItem && subSubItems.length > 0 && (
+                          <div className="absolute left-full top-0 bg-white shadow-lg rounded-md min-w-[280px] z-20">
+                            <ul className="py-1"> {/* Reduced padding here */}
+                              {subSubItems.map((subSubItem, subSubIndex) => (
+                                <>
+                                  {subSubIndex > 0 && <hr className="border-t border-gray-200 mx-2" />} {/* Horizontal divider */}
+                                  <li 
+                                    key={subSubIndex} 
+                                    className="px-4 py-2 hover:bg-gray-100 whitespace-nowrap"
+                                  >
+                                    <Link 
+                                      href={`/${item.toLowerCase()}/${subItem.toLowerCase().replace(/\s+/g, '-')}/${subSubItem.toLowerCase().replace(/\s+/g, '-')}`}
+                                      className="block w-full"
+                                    >
+                                      {subSubItem}
+                                    </Link>
+                                  </li>
+                                </>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </li>
+                    </>
                   ))}
                 </ul>
               </div>
@@ -76,7 +124,7 @@ const Navbar = () => {
       {/* Media Button on the Right */}
       <div>
         <Link href="/media">
-        <button className="hover:text-[#F69226] mr-2">Media</button>
+          <button className="hover:text-[#F69226] mr-4">Media</button>
         </Link>
       </div>
     </nav>
