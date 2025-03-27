@@ -3,12 +3,12 @@ import Link from "next/link";
 
 export default function NotFound() {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
+        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: '12px' }} >
             <Image 
                 src="/pageNotFound.jpg" 
                 alt="404" 
-                width={1000} 
-                height={1000} 
+                width={800} 
+                height={800} 
             />
             
             <Link href="/">
