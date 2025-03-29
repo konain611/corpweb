@@ -53,7 +53,7 @@ export default function Solution() {
                             </div>
                         </div>
                     </a>
-                    <Link href="/threat-assurance">
+                    <Link href="/products/security-challenge/threat-assurance">
                         <div className="bg-[#FF9102] p-6 rounded-lg text-center text-white font-semibold h-full flex flex-col">
                             <Image
                                 alt="Shield with exclamation mark icon representing Threat Assurance"

@@ -50,7 +50,7 @@ export default function CustomerRecognition() {
                         <span>✔ Technology</span>
                         <span>✔ Retail</span>
                     </div>
-                    <Link href="/experience" className="mt-6 px-4 py-2 text-[#F69226] font-medium border border-[#F69226] rounded-md flex items-center gap-2 hover:bg-[#F69226] hover:text-white transition-all" >
+                    <Link href="/company/about-us/experience" className="mt-6 px-4 py-2 text-[#F69226] font-medium border border-[#F69226] rounded-md flex items-center gap-2 hover:bg-[#F69226] hover:text-white transition-all" >
                         Experience →
                     </Link >
                 </div>
