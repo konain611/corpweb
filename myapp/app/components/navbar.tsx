@@ -42,11 +42,17 @@ const Navbar = () => {
     setActiveSubDropdown(null);
   };
 
+  const handleItemClick = () => {
+    // Close all dropdowns when an item is clicked
+    setActiveDropdown(null);
+    setActiveSubDropdown(null);
+  };
+
   return (
-    <nav className="text-[#003366] bg-[#F7F7F7] shadow-lg p-1 flex justify-between items-center font-semibold">
+    <nav className="text-[#003366] bg-[#F7F7F7] shadow-lg p-1 flex justify-between items-center font-semibold sticky top-0 z-50">
       {/* Logo on the Left */}
       <div>
-        <Link href="/">
+        <Link href="/" onClick={handleItemClick}>
           <Image src="/Logo/LogoRound.png" alt="Diginfo Logo" width={70} height={70} />
         </Link>
       </div>
@@ -61,19 +67,24 @@ const Navbar = () => {
             onMouseLeave={handleMouseLeave}
           >
             {item === "Home" ? (
-              <Link href="/" className="hover:text-[#F69226] flex items-center">
+              <Link 
+                href="/" 
+                className="hover:text-[#F69226] flex items-center"
+                onClick={handleItemClick}
+              >
                 {item}
               </Link>
             ) : (
               <button 
                 className={`hover:text-[#F69226] flex items-center ${activeDropdown === item ? 'text-[#F69226]' : ''}`}
+                onClick={() => setActiveDropdown(activeDropdown === item ? null : item)}
               >
                 {item} <span className="ml-1">▾</span>
               </button>
             )}
             
             {activeDropdown === item && dropdownContent[item as keyof typeof dropdownContent] && (
-              <div className="absolute left-0 bg-white shadow-lg rounded-md w-56 z-10">
+              <div className="absolute left-0 bg-white shadow-lg rounded-md w-56 z-50">
                 <ul className="py-1">
                   {Object.entries(dropdownContent[item as keyof typeof dropdownContent]).map(([subItem, subSubItems], subIndex) => [
                     subIndex > 0 && (
@@ -88,12 +99,27 @@ const Navbar = () => {
                       onMouseLeave={() => setActiveSubDropdown(null)}
                     >
                       <div className="flex justify-between items-center">
-                        <span>{subItem}</span>
-                        {subSubItems.length > 0 && <span>▸</span>}
+                        {subSubItems.length > 0 ? (
+                          <button 
+                            className="w-full text-left flex justify-between items-center"
+                            onClick={() => setActiveSubDropdown(activeSubDropdown === subItem ? null : subItem)}
+                          >
+                            <span>{subItem}</span>
+                            <span>▸</span>
+                          </button>
+                        ) : (
+                          <Link 
+                            href={`/${item.toLowerCase()}/${subItem.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="block w-full"
+                            onClick={handleItemClick}
+                          >
+                            {subItem}
+                          </Link>
+                        )}
                       </div>
                 
                       {activeSubDropdown === subItem && subSubItems.length > 0 && (
-                        <div className="absolute left-full top-0 bg-white shadow-lg rounded-md min-w-[280px] z-20">
+                        <div className="absolute left-full top-0 bg-white shadow-lg rounded-md min-w-[280px] z-50">
                           <ul className="py-1">
                             {subSubItems.map((subSubItem, subSubIndex) => [
                               subSubIndex > 0 && (
@@ -108,6 +134,7 @@ const Navbar = () => {
                                 <Link 
                                   href={`/${item.toLowerCase()}/${subItem.toLowerCase().replace(/\s+/g, '-')}/${subSubItem.toLowerCase().replace(/\s+/g, '-')}`}
                                   className="block w-full"
+                                  onClick={handleItemClick}
                                 >
                                   {subSubItem}
                                 </Link>
@@ -127,7 +154,7 @@ const Navbar = () => {
       
       {/* Media Button on the Right */}
       <div>
-        <Link href="/media">
+        <Link href="/media" onClick={handleItemClick}>
           <button className="hover:text-[#F69226] mr-4">Media</button>
         </Link>
       </div>
