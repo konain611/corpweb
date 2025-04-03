@@ -17,7 +17,7 @@ const Navbar = () => {
     Services: {
       "Detection & Response": ["GRC Consulting", "CyberSecurity Consulting & Advisory Services", "Best Cyber Security Product Report", "Buyers Guide For Best Cyber Security Product"],
       "Assesment": ["GRC Implementation Services", "Security Assesment & Penetration Testing", "POC As A Service"],
-      "Managed": ["Managed Security Services (MSS)", "Cyber Secuirty Professional & Certification Training Through DG Academy", "Business Continuity & Recovery (BCM DR) Automation"],
+      "Managed": ["Managed Security Services (MSS)", "Cyber Security Professional & Certification Training Through DG Academy", "Business Continuity & Recovery (BCM DR) Automation"],
       "Cloud": ["DG Cloud Hosting Services", "Virtualization & Cloud Computing (VCC) Consulting Services", "Cloud Migration Services"],
     },
     Products: {
