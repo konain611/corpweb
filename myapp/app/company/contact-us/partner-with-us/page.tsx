@@ -1,7 +1,7 @@
 import Return from "@/app/components/return";
 import Image from "next/image";
 
-export default function CustomerSupport() {
+export default function PartnerWithUs() {
     return (
         <div>
             <div className="bg-white">
@@ -19,11 +19,13 @@ export default function CustomerSupport() {
 
                     <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
                         <h1 className="text-4xl lg:text-5xl font-bold text-[#F69226] mb-6">
-                            Customer Support
+                            Partner With Us
                         </h1>
                         <p className="text-lg text-gray-200 max-w-3xl mx-auto">
-                            24/7 expert assistance to resolve technical challenges and maintain seamless business continuity
+                            WITH PARTNERS LIKE THESE, YOU ARE
+                            BOUND TOGET SERVICE ON A DIFFERENT LEVEL.
                         </p>
+
                     </div>
                 </section>
 
@@ -79,7 +81,7 @@ export default function CustomerSupport() {
 
                         {/* Dropdown Row */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            
+
                             <div>
                                 <label className="block text-gray-500 text-sm font-bold mb-2">
                                     Select Domain *
