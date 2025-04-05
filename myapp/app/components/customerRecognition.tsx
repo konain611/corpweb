@@ -10,12 +10,13 @@ const reviews = [
     },
     {
         id: 2,
-        text: 'VERY NICE WEBSITE',
-        author: 'Syed Konain Nasir'
+        text: 'DGACADEMY has provided a flexible and comprehensive VM certification course',
+        author: 'Dr. Zeeshan',
+        position: 'Dean/ HoD, Naval Architecture Department, NUST-PNEC'
     },
     {
         id: 3,
-        text: 'HELLO WORLD Sample Text.',
+        text: 'DIGINFO provides us with true security management capabilities',
         author: 'Syed Konain Nasir'
     }
 ];

@@ -11,8 +11,7 @@ const Navbar = () => {
   const dropdownContent = {
     Company: {
       "About Us": ["Company Overview", "Leadership", "Experience", "Accredation", "Policy"],
-      "Strategy": ["DG Edge", "Customer Recognition", "Knowledge Base", "Implimentation Services", "Technical Support"],
-      "Contact Us": ["Customer Support", "Partner With Us", "General Query", "Media Request"],
+      "Strategy": ["DG Edge", "Customer Recognition", "Knowledge Base", "Implimentation Services", "Technical Support"]
     },
     Services: {
       "Detection & Response": ["GRC Consulting", "CyberSecurity Consulting & Advisory Services", "Best Cyber Security Product Report", "Buyers Guide For Best Cyber Security Product"],
@@ -154,8 +153,8 @@ const Navbar = () => {
       
       {/* Media Button on the Right */}
       <div>
-        <Link href="/media" onClick={handleItemClick}>
-          <button className="hover:text-[#F69226] mr-4">Media</button>
+        <Link href="/company/contact-us/customer-support" onClick={handleItemClick}>
+          <button className="hover:text-[#F69226] mr-4">Contact Us</button>
         </Link>
       </div>
     </nav>

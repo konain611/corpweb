@@ -1,4 +1,5 @@
 "use client"
+
 import { supabase } from '@/lib/supabase';
 import Return from "@/app/components/return";
 import Image from "next/image";
@@ -30,45 +31,45 @@ export default function CustomerSupport() {
         e.preventDefault();
         setLoading(true);
         setSubmitStatus(null);
-      
+
         try {
-          const { data, error } = await supabase
-            .from('inquiries')
-            .insert([formData])
-            .select();
-      
-          if (error) {
-            console.error('Supabase error details:', {
-              message: error.message,
-              code: error.code,
-              details: error.details,
-              hint: error.hint
+            const { data, error } = await supabase
+                .from('inquiries')
+                .insert([formData])
+                .select();
+
+            if (error) {
+                console.error('Supabase error details:', {
+                    message: error.message,
+                    code: error.code,
+                    details: error.details,
+                    hint: error.hint
+                });
+                throw error;
+            }
+
+            console.log('Inserted data:', data);
+            setSubmitStatus('success');
+            setFormData({
+                first_name: '',
+                last_name: '',
+                email: '',
+                subject: '',
+                phone: '',
+                domain: '',
+                message: ''
             });
-            throw error;
-          }
-      
-          console.log('Inserted data:', data);
-          setSubmitStatus('success');
-          setFormData({
-            first_name: '',
-            last_name: '',
-            email: '',
-            subject: '',
-            phone: '',
-            domain: '',
-            message: ''
-          });
         } catch (error: unknown) {
-          console.error('Full error object:', error);
-          setSubmitStatus('error');
-          
-          if (error instanceof Error) {
-            console.error('Error stack:', error.stack);
-          }
+            console.error('Full error object:', error);
+            setSubmitStatus('error');
+
+            if (error instanceof Error) {
+                console.error('Error stack:', error.stack);
+            }
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
-      };
+    };
 
     // Debug - remove in production
     useEffect(() => {
@@ -91,10 +92,10 @@ export default function CustomerSupport() {
 
                     <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
                         <h1 className="text-4xl lg:text-5xl font-bold text-[#F69226] mb-6">
-                            Customer Support
+                            Contact Us
                         </h1>
                         <p className="text-lg text-gray-200 max-w-3xl mx-auto">
-                            24/7 expert assistance to resolve technical challenges and maintain seamless business continuity
+                            24/7 expert assistance to resolve technical challenges and maintain seamless business continuity.
                         </p>
                     </div>
                 </section>
@@ -179,6 +180,7 @@ export default function CustomerSupport() {
 
                         {/* Dropdown Row */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            {/* Domain Dropdown */}
                             <div>
                                 <label className="block text-gray-500 text-sm font-bold mb-2">
                                     Select Domain *
@@ -196,20 +198,29 @@ export default function CustomerSupport() {
                                     <option value="DGMagazine">DGMagazine</option>
                                 </select>
                             </div>
+
+                            {/* Subject Dropdown */}
+                            <div>
+                                <label className="block text-gray-500 text-sm font-bold mb-2">
+                                    Inquiry Type *
+                                </label>
+                                <select
+                                    name="subject"
+                                    value={formData.subject}
+                                    onChange={handleChange}
+                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
+                                    required
+                                >
+                                    <option value="">Select an Option</option>
+                                    <option value="Customer Support">Customer Support</option>
+                                    <option value="Media Request">Media Request</option>
+                                    <option value="General Query">General Query</option>
+                                    <option value="Partner With Us">Partner With Us</option>
+                                </select>
+                            </div>
                         </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-500 text-sm font-bold mb-2">
-                                Subject *
-                            </label>
-                            <input
-                                type="text"
-                                name="subject"
-                                required
-                                value={formData.subject}
-                                onChange={handleChange}
-                                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                            />
-                        </div>
+
+
                         {/* Inquiry Field */}
                         <div className="mb-6">
                             <label className="block text-gray-500 text-sm font-bold mb-2">
