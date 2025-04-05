@@ -5,6 +5,14 @@
   --foreground: #171717;
 }
 
+/* .transition-all {
+  transition: all 0.3s ease;
+}
+
+.transform {
+  transform: translateZ(0);
+} */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

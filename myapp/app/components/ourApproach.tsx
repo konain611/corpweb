@@ -1,75 +1,92 @@
 import Image from 'next/image';
 
 export default function Approach() {
+    const approaches = [
+        {
+            icon: "/Approach/educate.png",
+            alt: "Educate icon",
+            title: "EDUCATE",
+            points: [
+                "Creation of awareness and gathering of knowledge",
+                "Training and educating our customers."
+            ]
+        },
+        {
+            icon: "/Approach/practise.png",
+            alt: "Practice icon",
+            title: "PRACTICE",
+            points: [
+                "Assessment of problems",
+                "Optimum solution, professional services, pre-sales, solution designing",
+                "Implementing DG Solutions",
+                "Best practices and International standards"
+            ]
+        },
+        {
+            icon: "/Approach/manage.png",
+            alt: "Manage icon",
+            title: "MANAGE",
+            points: [
+                "Our methodical approach in managing and following tested procedures helps our client realize optimum benefit from their investments in people, technology, equipment and business procedures."
+            ]
+        },
+        {
+            icon: "/Approach/ensure.png",
+            alt: "Ensure icon",
+            title: "ENSURE",
+            points: [
+                "Assurance, audit, compliance, certifications",
+                "DG Safeguarding and Ensuring"
+            ]
+        }
+    ];
+
     return (
-        <div className="container px-6 md:px-32 py-12">
-            <h2 className="text-[#F69226] text-3xl font-semibold mb-7 text-left md:text-left">OUR APPROACH</h2>
-            <h1 className="text-[#003366] md:text-4xl font-semibold mb-9 text-left md:text-left leading-snug">WHY US</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="flex items-start">
-                    <Image
-                        alt="Icon of a person teaching"
-                        width={84}
-                        height={84}
-                        className="mr-4"
-                        src="/Approach/educate.png"
-                    />
-                    <div>
-                        <h4 className="text-2xl text-gray-800 font-bold">EDUCATE</h4>
-                        <p>Creation of awareness and gathering of knowledge</p>
-                        <p>Training and educating our customers.</p>
+        <div className="container px-4 sm:px-6 lg:px-8 xl:px-32 py-8 sm:py-10 md:py-12 mx-auto">
+            {/* Headings */}
+            <div className="mb-8 md:mb-12">
+                <h2 className="text-[#F69226] text-2xl sm:text-3xl font-semibold mb-3 sm:mb-4">
+                    OUR APPROACH
+                </h2>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#003366] leading-tight sm:leading-snug">
+                    WHY US
+                </h1>
+            </div>
+
+            {/* Approach Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                {approaches.map((approach, index) => (
+                    <div 
+                        key={index}
+                        className="flex items-start p-4 sm:p-5 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+                    >
+                        <div className="flex-shrink-0 mr-4 sm:mr-5">
+                            <Image
+                                alt={approach.alt}
+                                width={64}
+                                height={64}
+                                className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+                                src={approach.icon}
+                            />
+                        </div>
+                        <div>
+                            <h4 className="text-xl sm:text-2xl text-gray-800 font-bold mb-2 sm:mb-3">
+                                {approach.title}
+                            </h4>
+                            <ul className="space-y-2 sm:space-y-3">
+                                {approach.points.map((point, i) => (
+                                    <li 
+                                        key={i}
+                                        className="text-gray-600 text-sm sm:text-base leading-relaxed"
+                                    >
+                                        {point}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div className="flex items-start">
-                    <Image
-                        alt="Icon of a person practicing"
-                        width={84}
-                        height={84}
-                        className="mr-4"
-                        src="/Approach/practise.png"
-                    />
-                    <div>
-                        <h4 className="text-2xl text-gray-800 font-bold">PRACTICE</h4>
-                        <p>Assessment of problems</p>
-                        <p>
-                            Optimum solution, professional services, pre-sales, solution designing
-                        </p>
-                        <p>Implementing DG Solutions</p>
-                        <p>Best practices and International standards</p>
-                    </div>
-                </div>
-                <div className="flex items-start">
-                    <Image
-                        alt="Icon of people managing"
-                        width={84}
-                        height={84}
-                        className="mr-4"
-                        src="/Approach/manage.png"
-                    />
-                    <div>
-                        <h4 className="text-2xl text-gray-800 font-bold">MANAGE</h4>
-                        <p>
-                            Our methodical approach in managing and following tested procedures
-                            helps our client realize optimum benefit from their investments in
-                            people, technology, equipment and business procedures.
-                        </p>
-                    </div>
-                </div>
-                <div className="flex items-start">
-                    <Image
-                        alt="Icon of a person ensuring"
-                        width={84}
-                        height={84}
-                        className="mr-4"
-                        src="/Approach/ensure.png"
-                    />
-                    <div>
-                        <h4 className="text-2xl text-gray-800 font-bold">ENSURE</h4>
-                        <p>Assurance, audit, compliance, certifications</p>
-                        <p>DG Safeguarding and Ensuring</p>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
-    )
+    );
 }
