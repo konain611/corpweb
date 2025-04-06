@@ -119,7 +119,7 @@ const Navbar = () => {
       {/* Navigation Links - Desktop */}
       <div 
         ref={dropdownRef}
-        className={`${mobileMenuOpen ? 'block' : 'hidden'} md:flex md:space-x-4 w-full md:w-auto mt-4 md:mt-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2`}
+        className={`${mobileMenuOpen ? 'block' : 'hidden'} text-[1.1rem] md:flex md:space-x-4 w-full md:w-auto mt-4 md:mt-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2`}
       >
         {["Home", "Company", "Services", "Products"].map((item) => (
           <div
@@ -129,15 +129,15 @@ const Navbar = () => {
             onMouseLeave={() => !isMobile && closeAll()}
           >
             {item === "Home" ? (
-              <Link href="/" onClick={closeAll} className="px-4 py-2 block hover:text-[#F69226]">
+              <Link href="/" onClick={closeAll} className="px-4 py-2 block hover:text-[#FF9102]">
                 {item}
               </Link>
             ) : (
               <>
                 <button
                   onClick={() => handleDropdown(item)}
-                  className={`px-4 py-2 w-full md:w-auto flex justify-between items-center hover:text-[#F69226] ${
-                    activeDropdown === item ? 'text-[#F69226]' : ''
+                  className={`px-4 py-2 w-full md:w-auto flex justify-between items-center hover:text-[#FF9102] ${
+                    activeDropdown === item ? 'text-[#FF9102]' : ''
                   }`}
                 >
                   {item}
@@ -191,9 +191,9 @@ const Navbar = () => {
                                   : 'md:absolute md:left-full md:top-0 md:min-w-[280px] bg-white shadow-lg'
                               }`}
                             >
-                              <ul className="py-1">
+                              <ul className="py-1 bg-[#FF9102]">
                                 {subSubItems.map((subSubItem) => (
-                                  <li key={subSubItem} className="px-4 py-2 hover:bg-gray-100">
+                                  <li key={subSubItem} className="px-4 py-2 hover:bg-[#FF8500]">
                                     <Link
                                       href={`/${item.toLowerCase()}/${subItem.toLowerCase().replace(/\s+/g, '-')}/${subSubItem.toLowerCase().replace(/\s+/g, '-')}`}
                                       onClick={closeAll}
@@ -218,7 +218,7 @@ const Navbar = () => {
 
         {/* Media Button for Desktop */}
         <div className="hidden md:block relative group py-2 md:py-0 w-full md:w-auto">
-          <Link href="/media" onClick={handleItemClick} className="px-4 py-2 block hover:text-[#F69226]">
+          <Link href="/media" onClick={handleItemClick} className="px-4 py-2 block hover:text-[#FF9102]">
             Media
           </Link>
         </div>
@@ -228,7 +228,7 @@ const Navbar = () => {
       <div className={`${mobileMenuOpen ? 'block' : 'hidden'} md:hidden w-full md:w-auto mt-4 md:mt-0`}>
         <Link href="/media" onClick={handleItemClick}>
           <button 
-            className="hover:text-[#F69226] px-4 py-2 w-full md:w-auto text-left md:text-center"
+            className="hover:text-[#FF9102] px-4 py-2 w-full md:w-auto text-left md:text-center"
             role="menuitem"
           >
             Media
