@@ -13,7 +13,7 @@ export default function SubFooter() {
                         CONTACT US FOR YOUR CYBER SECURITY NEEDS
                     </p>
                     <Link
-                        href="/company/contact-us/customer-support"
+                        href="/company/contact-us"
                         className="text-[#F69226] border-[#F69226] px-5 py-2 font-bold inline-flex items-center mt-2 transition-all duration-200 hover:bg-[#F69226] hover:text-white border-2"
                     >
                         GET IN TOUCH &nbsp; ▶

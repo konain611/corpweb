@@ -35,7 +35,8 @@ const Navbar = () => {
   const dropdownContent = {
     Company: {
       "About Us": ["Company Overview", "Leadership", "Experience", "Accredation", "Policy"],
-      "Strategy": ["DG Edge", "Customer Recognition", "Knowledge Base", "Implimentation Services", "Technical Support"]
+      "Strategy": ["DG Edge", "Customer Recognition", "Knowledge Base", "Implimentation Services", "Technical Support"],
+      "Contact Us": []
     },
     Services: {
       "Detection & Response": ["GRC Consulting", "CyberSecurity Consulting & Advisory Services", "Best Cyber Security Product Report", "Buyers Guide For Best Cyber Security Product"],
@@ -47,23 +48,10 @@ const Navbar = () => {
       "Security Challenge": ["Threat Assurance", "DG Lab"],
       "Education": ["DG Academy", "DG Kids"],
       "Cloud Security": ["DG Cloud"],
-      "Media": ["DG Magazine", "DG Media"],
+      // "Media": ["DG Magazine", "DG Media"],
       "Technology": ["Native Security"],
     }
   };
-
-  // const handleDropdownHover = (item: string) => {
-  //   setActiveDropdown(item);
-  // };
-
-  // const handleSubDropdownHover = (subItem: string) => {
-  //   setActiveSubDropdown(subItem);
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setActiveDropdown(null);
-  //   setActiveSubDropdown(null);
-  // };
 
   const handleItemClick = () => {
     setActiveDropdown(null);
@@ -71,22 +59,6 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   };
 
-  // const toggleDropdown = (item: string) => {
-  //   if (window.innerWidth < 768) { // Mobile behavior
-  //     setActiveDropdown(activeDropdown === item ? null : item);
-  //     setActiveSubDropdown(null);
-  //   } else { // Desktop behavior
-  //     setActiveDropdown(item);
-  //   }
-  // };
-
-  // const toggleSubDropdown = (subItem: string) => {
-  //   if (window.innerWidth < 768) { // Mobile behavior
-  //     setActiveSubDropdown(activeSubDropdown === subItem ? null : subItem);
-  //   } else { // Desktop behavior
-  //     setActiveSubDropdown(subItem);
-  //   }
-  // };
   const handleDropdown = (item: string) => {
     if (isMobile) {
       setActiveDropdown(activeDropdown === item ? null : item);
@@ -246,12 +218,12 @@ const Navbar = () => {
       
       {/* Contact Button */}
       <div className={`${mobileMenuOpen ? 'block' : 'hidden'} md:block w-full md:w-auto mt-4 md:mt-0`}>
-        <Link href="/company/contact-us/customer-support" onClick={handleItemClick}>
+        <Link href="/media" onClick={handleItemClick}>
           <button 
             className="hover:text-[#F69226] px-4 py-2 w-full md:w-auto text-left md:text-center"
             role="menuitem"
           >
-            Contact Us
+            Media
           </button>
         </Link>
       </div>
