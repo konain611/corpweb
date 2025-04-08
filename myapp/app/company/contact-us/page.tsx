@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
 import { supabase } from '@/lib/supabase';
 import Return from "@/app/components/return";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'; // ✅ Import js-cookie
 
 export default function CustomerSupport() {
     const [formData, setFormData] = useState({
@@ -19,6 +20,18 @@ export default function CustomerSupport() {
     const [loading, setLoading] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
 
+    useEffect(() => {
+        // ✅ Always show the form and use cookies for pre-filled data
+        const email = Cookies.get('email');
+        const first_name = Cookies.get('first_name');
+
+        setFormData(prev => ({
+            ...prev,
+            email: email || '',
+            first_name: first_name || '',
+        }));
+    }, []);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -33,23 +46,27 @@ export default function CustomerSupport() {
         setSubmitStatus(null);
 
         try {
-            const { data, error } = await supabase
+            const { error } = await supabase
                 .from('inquiries')
                 .insert([formData])
                 .select();
 
             if (error) {
-                console.error('Supabase error details:', {
-                    message: error.message,
-                    code: error.code,
-                    details: error.details,
-                    hint: error.hint
-                });
+                console.error('Supabase error:', error);
                 throw error;
             }
 
-            console.log('Inserted data:', data);
+            // Set cookies only for email and first name
+            Cookies.set('email', formData.email, { expires: 30 });
+            Cookies.set('first_name', formData.first_name, { expires: 30 });
+
             setSubmitStatus('success');
+
+            // ⏱️ Hide the message after 5 seconds and reset form
+            setTimeout(() => {
+                setSubmitStatus(null);
+            }, 5000);
+
             setFormData({
                 first_name: '',
                 last_name: '',
@@ -60,25 +77,17 @@ export default function CustomerSupport() {
                 message: ''
             });
         } catch (error: unknown) {
-            console.error('Full error object:', error);
+            console.error('Error:', error);
             setSubmitStatus('error');
-
-            if (error instanceof Error) {
-                console.error('Error stack:', error.stack);
-            }
         } finally {
             setLoading(false);
         }
     };
 
-    // Debug - remove in production
-    useEffect(() => {
-        console.log('Form data:', formData);
-    }, [formData]);
-
     return (
         <div>
             <div className="bg-white">
+                {/* Banner */}
                 <section className="mt-10 relative min-h-[300px] flex items-center">
                     <div className="absolute inset-0 z-0">
                         <Image
@@ -100,155 +109,136 @@ export default function CustomerSupport() {
                     </div>
                 </section>
 
-                <section className="my-8">
-                    <form
-                        onSubmit={handleSubmit}
-                        className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow-md"
-                    >
-                        {/* Status Messages */}
-                        {submitStatus === 'success' && (
-                            <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
-                                Thank you! Your inquiry has been submitted.
-                            </div>
-                        )}
+                {/* Show Thank You if form is already submitted */}
+                {submitStatus === 'success' ? (
+                    <div className="p-10 text-center">
+                        <h2 className="text-2xl font-semibold text-green-600">Thank you! Your inquiry has been submitted.</h2>
+                    </div>
+                ) : (
+                    <section className="my-8">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow-md"
+                        >
+                            {submitStatus === 'error' && (
+                                <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                                    Error submitting form. Please try again.
+                                </div>
+                            )}
 
-                        {submitStatus === 'error' && (
-                            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-                                Error submitting form. Please try again.
+                            {/* First & Last Name */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label className="block text-gray-500 text-sm font-bold mb-2">First Name *</label>
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        required
+                                        value={formData.first_name}
+                                        onChange={handleChange}
+                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-gray-500 text-sm font-bold mb-2">Last Name *</label>
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        required
+                                        value={formData.last_name}
+                                        onChange={handleChange}
+                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    />
+                                </div>
                             </div>
-                        )}
 
-                        {/* Name Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label className="block text-gray-500 text-sm font-bold mb-2">
-                                    First Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    name="first_name"
-                                    required
-                                    value={formData.first_name}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                                />
+                            {/* Email & Phone */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label className="block text-gray-500 text-sm font-bold mb-2">Email *</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        required
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-gray-500 text-sm font-bold mb-2">Phone *</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        required
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <label className="block text-gray-500 text-sm font-bold mb-2">
-                                    Last Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    name="last_name"
-                                    required
-                                    value={formData.last_name}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                                />
-                            </div>
-                        </div>
 
-                        {/* Contact Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label className="block text-gray-500 text-sm font-bold mb-2">
-                                    Email *
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
+                            {/* Domain & Subject */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label className="block text-gray-500 text-sm font-bold mb-2">Select Domain *</label>
+                                    <select
+                                        name="domain"
+                                        required
+                                        value={formData.domain}
+                                        onChange={handleChange}
+                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    >
+                                        <option value="">Select a domain</option>
+                                        <option value="Diginfo">Diginfo</option>
+                                        <option value="DGAcademy">DGAcademy</option>
+                                        <option value="DGMagazine">DGMagazine</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-gray-500 text-sm font-bold mb-2">Inquiry Type *</label>
+                                    <select
+                                        name="subject"
+                                        required
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    >
+                                        <option value="">Select an Option</option>
+                                        <option value="Customer Support">Customer Support</option>
+                                        <option value="Media Request">Media Request</option>
+                                        <option value="General Query">General Query</option>
+                                        <option value="Partner With Us">Partner With Us</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* Message */}
+                            <div className="mb-6">
+                                <label className="block text-gray-500 text-sm font-bold mb-2">Inquiry *</label>
+                                <textarea
+                                    rows={4}
+                                    name="message"
                                     required
-                                    value={formData.email}
+                                    value={formData.message}
                                     onChange={handleChange}
                                     className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
-                                />
+                                ></textarea>
                             </div>
-                            <div>
-                                <label className="block text-gray-500 text-sm font-bold mb-2">
-                                    Phone *
-                                </label>
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    required
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                                />
-                            </div>
-                        </div>
 
-                        {/* Dropdown Row */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            {/* Domain Dropdown */}
-                            <div>
-                                <label className="block text-gray-500 text-sm font-bold mb-2">
-                                    Select Domain *
-                                </label>
-                                <select
-                                    name="domain"
-                                    value={formData.domain}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                                    required
+                            {/* Submit Button */}
+                            <div className="flex justify-center">
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className={`bg-[#003366] text-white px-8 py-3 rounded hover:bg-[#F69226] transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 >
-                                    <option value="">Select a domain</option>
-                                    <option value="Diginfo">Diginfo</option>
-                                    <option value="DGAcademy">DGAcademy</option>
-                                    <option value="DGMagazine">DGMagazine</option>
-                                </select>
+                                    {loading ? 'Submitting...' : 'SUBMIT YOUR INQUIRY'}
+                                </button>
                             </div>
-
-                            {/* Subject Dropdown */}
-                            <div>
-                                <label className="block text-gray-500 text-sm font-bold mb-2">
-                                    Inquiry Type *
-                                </label>
-                                <select
-                                    name="subject"
-                                    value={formData.subject}
-                                    onChange={handleChange}
-                                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                                    required
-                                >
-                                    <option value="">Select an Option</option>
-                                    <option value="Customer Support">Customer Support</option>
-                                    <option value="Media Request">Media Request</option>
-                                    <option value="General Query">General Query</option>
-                                    <option value="Partner With Us">Partner With Us</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        {/* Inquiry Field */}
-                        <div className="mb-6">
-                            <label className="block text-gray-500 text-sm font-bold mb-2">
-                                Inquiry *
-                            </label>
-                            <textarea
-                                rows={4}
-                                name="message"
-                                required
-                                value={formData.message}
-                                onChange={handleChange}
-                                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#003366]"
-                            ></textarea>
-                        </div>
-
-                        {/* Submit Button */}
-                        <div className="flex justify-center">
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className={`bg-[#003366] text-white px-8 py-3 rounded hover:bg-[#F69226] transition-colors duration-300 ${loading ? 'opacity-50 cursor-not-allowed' : ''
-                                    }`}
-                            >
-                                {loading ? 'Submitting...' : 'SUBMIT YOUR INQUIRY'}
-                            </button>
-                        </div>
-                    </form>
-                </section>
+                        </form>
+                    </section>
+                )}
             </div>
 
             <Return />
