@@ -45,6 +45,7 @@ export default function RootLayout({
          className={`${roboto.className} ${montserrat.className}`}
       >
         <Navbar/>
+        <br />
         {children}
         <SubFooter/>
         <Footer/>

@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Policy() {
     return (
-        <div>
-            <section className="mt-10 relative min-h-[300px] flex items-center">
+        <div className="bg-white">
+            <section className="relative min-h-[300px] flex items-center">
 
                 <div className="absolute inset-0 z-0">
                     <Image

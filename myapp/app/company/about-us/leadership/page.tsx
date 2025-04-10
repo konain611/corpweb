@@ -73,9 +73,9 @@ export default function Leadership() {
     ];
 
     return (
-        <div>
+        <div className="bg-white">
             <div className="bg-white">
-                <section className="mt-10 relative min-h-[300px] flex items-center">
+                <section className="relative min-h-[300px] flex items-center">
 
                     <div className="absolute inset-0 z-0">
                         <Image
@@ -100,7 +100,7 @@ export default function Leadership() {
                             PASSIONATE AND MOTIVATED. OUR MANAGEMENT TEAM IS ALL
                             GEARED UP TO DELIVER THE GOODS
                         </h1>
-                        <p className="mb-8 leading-relaxed">
+                        <p className="mb-8 leading-relaxed text-gray-800">
                             DIGINFO has assembled a team of cyber security professionals that understands
                             the complex cyber threat spectrum. The proven methods to help clients achieve highest level of protection and security can only mean business and success.
                         </p>

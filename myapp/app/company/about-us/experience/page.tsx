@@ -104,8 +104,8 @@ export default function Experience() {
     ];
 
     return (
-        <div>
-            <section className="mt-10 relative min-h-[300px] flex items-center">
+        <div className="bg-white">
+            <section className="relative min-h-[300px] flex items-center">
 
                 <div className="absolute inset-0 z-0">
                     <Image
@@ -129,7 +129,7 @@ export default function Experience() {
                     <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-[#003366]">
                         THE COMPANIES WE KEEP ARE THOSE THAT PERFORM.
                     </h1>
-                    <p className="mb-8 leading-relaxed">
+                    <p className="mb-8 leading-relaxed text-gray-800">
                         Real Partners. Real Success Stories.
                     </p>
                 </div>

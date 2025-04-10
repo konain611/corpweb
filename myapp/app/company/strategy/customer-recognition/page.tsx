@@ -5,7 +5,7 @@ const Testimonials = () => {
     return (
         <div>
 
-            <section className="mt-10 relative min-h-[300px] flex items-center">
+            <section className=" relative min-h-[300px] flex items-center">
 
                 <div className="absolute inset-0 z-0">
                     <Image

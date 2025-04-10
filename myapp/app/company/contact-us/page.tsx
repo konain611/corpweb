@@ -85,10 +85,10 @@ export default function CustomerSupport() {
     };
 
     return (
-        <div>
+        <div className='bg-white'>
             <div className="bg-white">
                 {/* Banner */}
-                <section className="mt-10 relative min-h-[300px] flex items-center">
+                <section className="relative min-h-[300px] flex items-center">
                     <div className="absolute inset-0 z-0">
                         <Image
                             src="/CustomerSupport/support.png"
@@ -129,25 +129,25 @@ export default function CustomerSupport() {
                             {/* First & Last Name */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label className="block text-gray-500 text-sm font-bold mb-2">First Name *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">First Name *</label>
                                     <input
                                         type="text"
                                         name="first_name"
                                         required
                                         value={formData.first_name}
                                         onChange={handleChange}
-                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                        className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-gray-500 text-sm font-bold mb-2">Last Name *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">Last Name *</label>
                                     <input
                                         type="text"
                                         name="last_name"
                                         required
                                         value={formData.last_name}
                                         onChange={handleChange}
-                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                        className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     />
                                 </div>
                             </div>
@@ -155,25 +155,25 @@ export default function CustomerSupport() {
                             {/* Email & Phone */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label className="block text-gray-500 text-sm font-bold mb-2">Email *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">Email *</label>
                                     <input
                                         type="email"
                                         name="email"
                                         required
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                        className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-gray-500 text-sm font-bold mb-2">Phone *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">Phone *</label>
                                     <input
                                         type="tel"
                                         name="phone"
                                         required
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                        className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     />
                                 </div>
                             </div>
@@ -181,13 +181,13 @@ export default function CustomerSupport() {
                             {/* Domain & Subject */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label className="block text-gray-500 text-sm font-bold mb-2">Select Domain *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">Select Domain *</label>
                                     <select
                                         name="domain"
                                         required
                                         value={formData.domain}
                                         onChange={handleChange}
-                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                        className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     >
                                         <option value="">Select a domain</option>
                                         <option value="Diginfo">Diginfo</option>
@@ -196,13 +196,13 @@ export default function CustomerSupport() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-gray-500 text-sm font-bold mb-2">Inquiry Type *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">Inquiry Type *</label>
                                     <select
                                         name="subject"
                                         required
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                        className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     >
                                         <option value="">Select an Option</option>
                                         <option value="Customer Support">Customer Support</option>
@@ -215,14 +215,14 @@ export default function CustomerSupport() {
 
                             {/* Message */}
                             <div className="mb-6">
-                                <label className="block text-gray-500 text-sm font-bold mb-2">Inquiry *</label>
+                                <label className="block text-[#003366] text-sm font-bold mb-2">Inquiry *</label>
                                 <textarea
                                     rows={4}
                                     name="message"
                                     required
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full p-2 border rounded focus:ring-2 focus:ring-[#003366]"
+                                    className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                 ></textarea>
                             </div>
 
