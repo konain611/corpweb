@@ -51,9 +51,9 @@ export default function POC() {
     ]
 
     return (
-        <div>
+        <div className="bg-white">
             <div className="bg-white">
-                <section className="mt-10 relative min-h-[300px] flex items-center">
+                <section className=" relative min-h-[300px] flex items-center">
                     <div className="absolute inset-0 z-0">
                         <Image
                             src="/Assesment/banner.png"
@@ -102,19 +102,19 @@ export default function POC() {
                         <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-[#003366]">
                             Details
                         </h1>
-                        <p className="mb-8 leading-relaxed">
+                        <p className="mb-8 leading-relaxed text-gray-800">
                             We built our own framework and methodology based on real world complex scenarios, with several case studies fully representing and covering almost all kind of customers worldwide. We built use cases considering looking at each and every aspects of a product from People, Process and Technology prospective, covering strong and week areas of products, customer can record evidence of products responses against each use case scenario.
                         </p>
-                        <h1 className="title-font sm:text-4xl text-3xl my-4 font-medium text-[#003366]">
-                            DGLABS Product Evaluation
-                            Methodologies
-                        </h1>
+                        
                     </div>
                 </section>
 
                 <section className="py-12 bg-[#F7F7F7]">
                     <div className="container mx-auto px-4">
-
+                    <h1 className="title-font sm:text-4xl text-3xl mb-10 font-medium text-center  text-[#003366]">
+                            DGLABS Product Evaluation
+                            Methodologies
+                        </h1>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 px-10">
                             {clientCategories.map((category, index) => (
                                 <div key={index} className="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
