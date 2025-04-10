@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function DGCloud() {
     return (
-        <div>
-            <section className="mt-10 relative min-h-[300px] flex items-center">
+        <div className="bg-white">
+            <section className="relative min-h-[300px] flex items-center">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/Assesment/banner.png"
@@ -27,7 +27,7 @@ export default function DGCloud() {
                     <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-[#003366]">
                         Introduction
                     </h1>
-                    <p className="mb-8 leading-relaxed">
+                    <p className="mb-8 leading-relaxed text-gray-800">
                         DIGINFO is offering its own secure cloud services known as DGCLOUD where you can host any Web, Applications, Database and Files Repositories. DGCLOUD is a secure and feature-rich platform built on cutting edge computing, storage, cloud and virtualization technologies. DGCLOUD Orchestrator portal provides secure and easy to use management console to build, manage, and deploy your applications rapidly. You can define your requirements and make your own cloud application or Infrastructure at the speed of change.
                     </p>
                     <div className="bg-[#F7F7F7]">
@@ -37,7 +37,7 @@ export default function DGCloud() {
                                 <h1 className="title-font sm:text-4xl text-3xl my-4 font-medium text-[#003366]">
                                     Details
                                 </h1>
-                                <p className="mb-8 leading-relaxed">
+                                <p className="mb-8 leading-relaxed text-gray-800">
                                     You can host your Web, Application, Databases, Email, Files Repository, ERP,
                                     In-House Software, SAAS Applications on our DGCLOUD Infrastructure at competitive price.
                                     DGCLOUD is fully protected by advance security controls where very highly skilled
@@ -51,7 +51,7 @@ export default function DGCloud() {
                                 <h1 className="title-font sm:text-4xl text-3xl my-4 font-medium text-[#003366]">
                                     Key Elements
                                 </h1>
-                                <ul className="mb-8 leading-relaxed space-y-2 text-left">
+                                <ul className="mb-8 leading-relaxed space-y-2 text-left text-gray-800">
                                     <li>1. 24/7 Chat & Ticket Support.</li>
                                     <li>2. Built-in Director services and Active Directory.</li>
                                     <li>3. Secure DNS services.</li>
