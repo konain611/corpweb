@@ -23,7 +23,7 @@ const reviews = [
 
 export default function CustomerRecognition() {
     return (
-        <div className="container px-4 sm:px-6 lg:px-32 py-8 sm:py-10 md:py-12 mx-auto">
+        <div className="container px-4 sm:px-6 lg:px-32 py-8 sm:py-10 md:py-12 mx-auto bg-[#F7F7F7]">
             {/* Headings */}
             <div className="mb-8 md:mb-12">
                 <h2 className="text-[#F69226] text-2xl sm:text-3xl font-semibold mb-2 sm:mb-3 text-center md:text-left">

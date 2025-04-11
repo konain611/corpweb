@@ -42,7 +42,7 @@ export default function Approach() {
     ];
 
     return (
-        <div className="container px-4 sm:px-6 lg:px-8 xl:px-32 py-8 sm:py-10 md:py-12 mx-auto">
+        <div className="container px-4 sm:px-6 lg:px-8 xl:px-32 py-8 sm:py-10 md:py-12 mx-auto bg-white">
             {/* Headings */}
             <div className="mb-8 md:mb-12">
                 <h2 className="text-[#F69226] text-2xl sm:text-3xl font-semibold mb-3 sm:mb-4">
