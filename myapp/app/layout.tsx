@@ -31,7 +31,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "DIGINFO",
-  description: "created By Syed Konain Nasir, Generated using Next.js",
+  description: "Created by DIGINFO Team of developers.",
 };
 
 export default function RootLayout({
