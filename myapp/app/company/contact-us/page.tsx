@@ -4,7 +4,8 @@ import { supabase } from '@/lib/supabase';
 import Return from "@/app/components/return";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Cookies from 'js-cookie'; // ✅ Import js-cookie
+import Cookies from 'js-cookie';
+import { submitForm } from "@/app/actions/submitForm";
 
 export default function CustomerSupport() {
     const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ export default function CustomerSupport() {
     const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
 
     useEffect(() => {
-        // ✅ Always show the form and use cookies for pre-filled data
+        // Pre-fill form data from cookies
         const email = Cookies.get('email');
         const first_name = Cookies.get('first_name');
 
@@ -46,27 +47,29 @@ export default function CustomerSupport() {
         setSubmitStatus(null);
 
         try {
+            // Submit to Supabase
             const { error } = await supabase
                 .from('inquiries')
                 .insert([formData])
                 .select();
 
-            if (error) {
-                console.error('Supabase error:', error);
-                throw error;
-            }
+            if (error) throw error;
 
-            // Set cookies only for email and first name
+            // Submit via server action
+            const form = new FormData();
+            Object.entries(formData).forEach(([key, value]) => {
+                form.append(key, value);
+            });
+            await submitForm(form);
+
+            // Set cookies
             Cookies.set('email', formData.email, { expires: 30 });
             Cookies.set('first_name', formData.first_name, { expires: 30 });
 
+            // Show success state
             setSubmitStatus('success');
 
-            // ⏱️ Hide the message after 5 seconds and reset form
-            setTimeout(() => {
-                setSubmitStatus(null);
-            }, 5000);
-
+            // Reset form
             setFormData({
                 first_name: '',
                 last_name: '',
@@ -76,8 +79,13 @@ export default function CustomerSupport() {
                 domain: '',
                 message: ''
             });
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus(null);
+            }, 5000);
         } catch (error: unknown) {
-            console.error('Error:', error);
+            console.error('Submission error:', error);
             setSubmitStatus('error');
         } finally {
             setLoading(false);
@@ -87,7 +95,7 @@ export default function CustomerSupport() {
     return (
         <div className='bg-white'>
             <div className="bg-white">
-                {/* Banner */}
+                {/* Banner Section */}
                 <section className="relative min-h-[300px] flex items-center">
                     <div className="absolute inset-0 z-0">
                         <Image
@@ -109,10 +117,13 @@ export default function CustomerSupport() {
                     </div>
                 </section>
 
-                {/* Show Thank You if form is already submitted */}
+                {/* Form Section */}
                 {submitStatus === 'success' ? (
                     <div className="p-10 text-center">
                         <h2 className="text-2xl font-semibold text-green-600">Thank you! Your inquiry has been submitted.</h2>
+                        <p className="text-lg text-gray-600 mt-4">
+                            Wait 5 seconds to submit another response or click the button below to return to the homepage.
+                        </p>
                     </div>
                 ) : (
                     <section className="my-8">
@@ -126,7 +137,7 @@ export default function CustomerSupport() {
                                 </div>
                             )}
 
-                            {/* First & Last Name */}
+                            {/* Name Fields */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label className="block text-[#003366] text-sm font-bold mb-2">First Name *</label>
@@ -152,7 +163,7 @@ export default function CustomerSupport() {
                                 </div>
                             </div>
 
-                            {/* Email & Phone */}
+                            {/* Contact Info */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label className="block text-[#003366] text-sm font-bold mb-2">Email *</label>
@@ -178,7 +189,7 @@ export default function CustomerSupport() {
                                 </div>
                             </div>
 
-                            {/* Domain & Subject */}
+                            {/* Dropdowns */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label className="block text-[#003366] text-sm font-bold mb-2">Select Domain *</label>
@@ -213,7 +224,7 @@ export default function CustomerSupport() {
                                 </div>
                             </div>
 
-                            {/* Message */}
+                            {/* Message Field */}
                             <div className="mb-6">
                                 <label className="block text-[#003366] text-sm font-bold mb-2">Inquiry *</label>
                                 <textarea
