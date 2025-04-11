@@ -29,13 +29,13 @@ export default function CookieConsentBanner() {
             <p className="mb-2 sm:mb-0">We use cookies to improve your experience. You can manage your preferences.</p>
             <div className="flex gap-2">
                 <button
-                    className="bg-green-600 px-4 py-2 rounded hover:bg-green-700"
+                    className="border-2 border-green-600 px-4 py-2 rounded hover:bg-green-600"
                     onClick={handleAccept}
                 >
                     Accept
                 </button>
                 <button
-                    className="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
+                    className="border-2 border-red-600 px-4 py-2 rounded hover:bg-red-600"
                     onClick={handleReject}
                 >
                     Reject

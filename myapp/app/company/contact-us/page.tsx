@@ -41,6 +41,14 @@ export default function CustomerSupport() {
         }));
     };
 
+    // Only set cookies if consent is accepted
+    const consent = Cookies.get('cookie_consent');
+    if (consent === 'accepted') {
+        Cookies.set('email', formData.email, { expires: 30 });
+        Cookies.set('first_name', formData.first_name, { expires: 30 });
+    }
+
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
