@@ -40,10 +40,10 @@ export default function CompanyOverview() {
                                 Overview
                             </h1>
                             <p className="mb-8 leading-relaxed">
-                                Ten years ago, DIGINFO was only a dream. A dream to provide unique and innovative solutions for IT and cyber security community. All over the world. Today, DIGINFO has evolved into a multidisciplinary company focused on technology and cyber security.<br></br>
+                                Since 2011, what began as a dream to provide unique and innovative solutions for the IT and cyber security community across the globe has flourished. Today, DIGINFO has evolved into a multidisciplinary company focused on technology and cyber security.<br />
                             </p>
                             <p className="mb-8 leading-relaxed">
-                                Most of the world’s businesses are currently facing tough times and stiff competition. Understandably, they are looking for turnkey solutions to tackle the situation. In this scenario, we have devised our own state-of-the art initiatives that cover a wide range of domains.<br></br>
+                                Most of the world&apos;s businesses are currently facing tough times and stiff competition. Understandably, they are looking for turnkey solutions to tackle the situation. In this scenario, we have devised our own state-of-the art initiatives that cover a wide range of domains.<br></br>
 
                             </p>
                             <p className="mb-8 leading-relaxed">
@@ -228,8 +228,8 @@ export default function CompanyOverview() {
                                         Focus
                                     </h2>
                                     <p className="leading-relaxed text-base text-gray-900">
-                                    We focus on what’s important in a business and we help
-                                    secure it by deep assessment and best solution.
+                                        We focus on what’s important in a business and we help
+                                        secure it by deep assessment and best solution.
                                     </p>
                                 </div>
                                 <div className="sm:w-32 sm:h-32 w-20 h-20 flex-shrink-0 sm:ml-10">
@@ -284,7 +284,7 @@ export default function CompanyOverview() {
 
             </div>
 
-            <Return/>
+            <Return />
         </div>
     );
 }

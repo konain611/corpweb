@@ -177,16 +177,21 @@ export default function CustomerSupport() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-[#003366] text-sm font-bold mb-2">Phone *</label>
+                                    <label className="block text-[#003366] text-sm font-bold mb-2">
+                                        Phone *
+                                    </label>
                                     <input
                                         type="tel"
                                         name="phone"
                                         required
                                         value={formData.phone}
                                         onChange={handleChange}
+                                        pattern="^\+?[0-9]+$"
+                                        title="Please enter a valid phone number. It may start with a '+' and contain only digits."
                                         className="w-full p-2 border text-gray-600 rounded focus:ring-2 focus:ring-[#003366]"
                                     />
                                 </div>
+
                             </div>
 
                             {/* Dropdowns */}
