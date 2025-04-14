@@ -58,7 +58,7 @@ export default function BannerCarousel() {
           }`}
         >
           <div className="relative w-full h-full">
-            <Image
+            <a href="https://www.youtube.com/live/UE6Jx159gd0"><Image
               src={slide.image}
               alt={slide.title}
               fill
@@ -67,7 +67,7 @@ export default function BannerCarousel() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
               quality={100}
             />
-
+            </a>
             {/* Optional: Enable text overlay below if needed */}
             {/* <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
               <div className="text-center px-4 max-w-4xl">
