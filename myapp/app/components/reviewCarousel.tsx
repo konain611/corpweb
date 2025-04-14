@@ -94,7 +94,7 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
           <button
             key={index}
             onClick={() => goToIndex(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full mx-1 cursor-pointer transition-all duration-200 ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full mx-1 cursor-pointer transition-all duration-400 ${
               index === currentIndex ? 'bg-[#003366] scale-125' : 'bg-gray-300 hover:bg-gray-400'
             }`}
             aria-label={`Go to review ${index + 1}`}

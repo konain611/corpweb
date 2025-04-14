@@ -4,20 +4,15 @@ import ReviewCarousel from "./reviewCarousel";
 const reviews = [
     {
         id: 1,
-        text: 'Working with the staff with SBS is always a pleasure. They helped us write policies that we never had, did intrusion testing and a vulnerability assessment. We are more secure because of the work they do for us',
+        text: 'We have found DIGINFO to be knowledgeable, very easy to work with and our association with them has been a benefit to our company.',
         author: 'Dr Ashfaq A. Malik',
         position: 'prof./ Cdr (R) PN, Ex-Dean/HoD, Cyber Security Department, PN Engg College.'
     },
     {
         id: 2,
-        text: 'DGACADEMY has provided a flexible and comprehensive VM certification course',
+        text: 'Working with the staff at SBS is always a pleasure. They helped us write policies that we never had, did intrusion testing and a vulnerability assessment. We are more secure because of the work they do for us.',
         author: 'Dr. Zeeshan',
         position: 'Dean/ HoD, Naval Architecture Department, NUST-PNEC'
-    },
-    {
-        id: 3,
-        text: 'DIGINFO provides us with true security management capabilities',
-        author: 'Syed Konain Nasir'
     }
 ];
 
@@ -44,7 +39,7 @@ export default function CustomerRecognition() {
                     <ReviewCarousel
                         reviews={reviews}
                         autoRotate={true}
-                        rotateInterval={3000}
+                        rotateInterval={4000}
                     />
                 </div>
 

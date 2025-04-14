@@ -26,10 +26,10 @@ export default function SubFooter() {
                         Visit Us
                     </h1>
                     <p className="leading-relaxed text-base">
-                        DIGITAL INFORMATION SYSTEMS (PRIVATE) LIMITED<br />
-                        Office 5, Amber Estate, Main Shahrah-e-Faisal,<br />
-                        Near Baloch Colony Flyover, Karachi 75350.<br />
-                        Sindh, Pakistan
+                        <br />
+                        C-59, Block 13D-1, Gulshan-e-Iqbal,<br />
+                        Karachi, Pakistan.<br />
+                        Postal Code: 75300<br />
                     </p>
                 </div>
             </div>

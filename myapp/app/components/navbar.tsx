@@ -34,7 +34,7 @@ const Navbar = () => {
 
   const dropdownContent = {
     Company: {
-      "About Us": ["Company Overview", "Leadership", "Experience", "Accredation", "Policy"],
+      "About Us": ["Company Overview", "Leadership", "Experience", "Accreditation", "Policy"],
       "Strategy": ["DG Edge", "Customer Recognition", "Knowledge Base", "Implimentation Services", "Technical Support"],
       "Contact Us": []
     },

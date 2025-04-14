@@ -34,7 +34,7 @@ const Testimonials = () => {
                                 DGACADEMY Implementation at NUST-PNEC
                             </h3>
                             <p className="text-[#003366] mb-4">
-                                &quot;DGACADEMY is one of the products from DICINFO that will bring a cultural change in our college...&quot;
+                                &quot;DGACADEMY is one of the products from DIGINFO that will bring a cultural change in our college...&quot;
                             </p>
                             <div className="border-l-4 border-[#F69226] pl-4 my-6">
                                 <blockquote className="text-[#003366] italic">
@@ -98,9 +98,9 @@ const Testimonials = () => {
 
                             </div>
                             <div className="mt-6">
-                                <p className="font-bold text-[#003366]">-</p>
-                                <p className="text-[#003366]">-</p>
-                                <p className="text-[#003366]">-</p>
+                                <p className="font-bold text-[#003366]">Dr. Ashfaq A. Malik</p>
+                                <p className="text-[#003366]">Prof Cdr (R) PN. Ex-Dean/ HoD</p>
+                                <p className="text-[#003366]">Cyber Security Department, PN Engg College</p>
                             </div>
                         </div>
 
