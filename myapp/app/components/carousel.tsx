@@ -9,18 +9,24 @@ export default function BannerCarousel() {
   const slides = [
     {
       id: 1,
+      image: "/Carousel/webinar.jpg",
+      title: "Webinar",
+      description: "Banner for the webinar",
+    },
+    {
+      id: 2,
       image: "/Carousel/C1.png",
       title: "Cyber Security Solutions",
       description: "Protecting your digital assets with cutting-edge security measures",
     },
     {
-      id: 2,
+      id: 3,
       image: "/Carousel/C2.png",
       title: "Advanced Threat Protection",
       description: "Stay ahead of cyber threats with our proactive security approach",
     },
     {
-      id: 3,
+      id: 4,
       image: "/Carousel/C3.png",
       title: "Enterprise Security",
       description: "Comprehensive security solutions for businesses of all sizes",
@@ -30,7 +36,7 @@ export default function BannerCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % slides.length);
-    }, 2500);
+    }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
