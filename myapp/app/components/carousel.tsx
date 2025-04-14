@@ -58,7 +58,7 @@ export default function BannerCarousel() {
           }`}
         >
           <div className="relative w-full h-full">
-            <a href="https://www.youtube.com/live/UE6Jx159gd0"><Image
+            <a href="https://www.youtube.com/live/UE6Jx159gd0" target="_blank" rel="noopener noreferrer"><Image
               src={slide.image}
               alt={slide.title}
               fill
