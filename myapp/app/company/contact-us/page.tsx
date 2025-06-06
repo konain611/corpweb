@@ -1,104 +1,54 @@
 "use client";
-
-import { supabase } from '@/lib/supabase';
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { submitForm } from "@/app/actions/submitForm";
 import Return from "@/app/components/return";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import Cookies from 'js-cookie';
-import { submitForm } from "@/app/actions/submitForm";
 
 export default function CustomerSupport() {
-    const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        subject: '',
-        phone: '',
-        domain: '',
-        message: ''
-    });
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    subject: "",
+    phone: "",
+    domain: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(null);
 
-    const [loading, setLoading] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+  useEffect(() => {
+    const email = Cookies.get("email");
+    const first_name = Cookies.get("first_name");
+    setFormData((p) => ({ ...p, email: email || "", first_name: first_name || "" }));
+  }, []);
 
-    useEffect(() => {
-        // Pre-fill form data from cookies
-        const email = Cookies.get('email');
-        const first_name = Cookies.get('first_name');
-
-        setFormData(prev => ({
-            ...prev,
-            email: email || '',
-            first_name: first_name || '',
-        }));
-    }, []);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    // Only set cookies if consent is accepted
-    const consent = Cookies.get('cookie_consent');
-    if (consent === 'accepted') {
-        Cookies.set('email', formData.email, { expires: 30 });
-        Cookies.set('first_name', formData.first_name, { expires: 30 });
+  const handleChange = (e: React.ChangeEvent<any>) => {
+    setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
+    if (Cookies.get("cookie_consent") === "accepted") {
+      Cookies.set(e.target.name, e.target.value, { expires: 30 });
     }
+  };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setSubmitStatus(null);
+    try {
+      await submitForm(formData);
+      Cookies.set("email", formData.email, { expires: 30 });
+      Cookies.set("first_name", formData.first_name, { expires: 30 });
+      setSubmitStatus("success");
+      setFormData({ first_name: "", last_name: "", email: "", subject: "", phone: "", domain: "", message: "" });
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setSubmitStatus(null);
-
-        try {
-            // Submit to Supabase
-            const { error } = await supabase
-                .from('inquiries')
-                .insert([formData])
-                .select();
-
-            if (error) throw error;
-
-            // Submit via server action
-            const form = new FormData();
-            Object.entries(formData).forEach(([key, value]) => {
-                form.append(key, value);
-            });
-            await submitForm(form);
-
-            // Set cookies
-            Cookies.set('email', formData.email, { expires: 30 });
-            Cookies.set('first_name', formData.first_name, { expires: 30 });
-
-            // Show success state
-            setSubmitStatus('success');
-
-            // Reset form
-            setFormData({
-                first_name: '',
-                last_name: '',
-                email: '',
-                subject: '',
-                phone: '',
-                domain: '',
-                message: ''
-            });
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                setSubmitStatus(null);
-            }, 5000);
-        } catch (error: unknown) {
-            console.error('Submission error:', error);
-            setSubmitStatus('error');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <div className='bg-white'>
