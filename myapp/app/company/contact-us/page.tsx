@@ -24,7 +24,7 @@ export default function CustomerSupport() {
     setFormData((p) => ({ ...p, email: email || "", first_name: first_name || "" }));
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<any>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
     if (Cookies.get("cookie_consent") === "accepted") {
       Cookies.set(e.target.name, e.target.value, { expires: 30 });
